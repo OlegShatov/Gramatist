@@ -1,0 +1,9 @@
+<h2>Select theme of lesson:</h2>
+<mat-form-field>
+    <mat-label>Lesson</mat-label>
+    <mat-select>
+        <mat-option *ngFor="let lesson of lessons" [value]="lesson.id">
+            {{lesson.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
