@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SelectLessonService} from './select-lesson.service';
 import {Lesson} from '../../../fake-db/Lessons';
-import {Observable} from 'rxjs';
 
 
 @Component({
