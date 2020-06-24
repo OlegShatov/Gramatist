@@ -8,10 +8,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FuseSharedModule } from '@fuse/shared.module';
 import {LessonsComponent} from './lessons.component';
-import { SelectLessonComponent } from './select-lesson/select-lesson.component';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {FakeDbService} from '../../fake-db/fake-db.service';
-import {SelectLessonService} from './select-lesson/select-lesson.service';
+import {LessonService} from './lesson.service';
 
 const routes: Routes = [
     {
@@ -22,12 +21,10 @@ const routes: Routes = [
 
 @NgModule({
     declarations: [
-        LessonsComponent,
-        SelectLessonComponent
+        LessonsComponent
     ],
     imports     : [
         RouterModule.forChild(routes),
-        InMemoryWebApiModule.forRoot(FakeDbService),
         MatButtonModule,
         MatFormFieldModule,
         MatIconModule,
@@ -37,7 +34,7 @@ const routes: Routes = [
 
         FuseSharedModule,
     ],
-    providers: [SelectLessonService]
+    providers: [LessonService]
 })
 export class LessonsModule
 {

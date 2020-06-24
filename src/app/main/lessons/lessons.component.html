@@ -28,7 +28,7 @@
 
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-
+                    
                     <mat-form-field appearance="outline" fxFlex="25" class="pr-4">
                         <mat-label>Phrases repeated</mat-label>
                         <input matInput formControlName="PhraseRepeat">
@@ -51,12 +51,27 @@
 
                 </div>
 
-                <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                        <app-select-lesson>loading</app-select-lesson>
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <h2>Select theme of lesson:</h2>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                    <mat-form-field fxFlex="50" class="pr-4">
+                        <mat-label>Lesson</mat-label>
+                        <mat-select name="selectedLesson" [(ngModel)]="selectedLessonId" 
+                        (ngModelChange)="setNameLesson()"
+                        [ngModelOptions]="{standalone: true}">
+                            <mat-option *ngFor="let lesson of lessons" [value]="lesson.id">
+                                {{lesson.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <div fxFlex="50">
+                        <button mat-raised-button color="accent" (click)="startLesson()">Start</button>
+                    </div>
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
-                    <span>Lesson's phrase</span>
+                    <span>{{currentphrase.textRus}}</span>
                 </div>
 
 
@@ -64,8 +79,9 @@
 
                     <mat-form-field appearance="outline" fxFlex="100">
                         <mat-label>Your translation</mat-label>
-                        <textarea matInput formControlName="translation">
-                        <mat-icon matSuffix>edit</mat-icon></textarea>
+                        <textarea matInput formControlName="translation" [(ngModel)]="userTranslationAnswer" 
+                        (ngModelChange)="checkUserAnswer()">
+                        </textarea>
                     </mat-form-field>
 
                 </div>

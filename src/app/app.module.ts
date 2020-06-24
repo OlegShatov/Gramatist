@@ -25,9 +25,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {Role} from './_models';
 import {LoginModule} from './main/login';
 import {LessonsModule} from './main/lessons/lessons.module';
-import {SelectLessonService} from './main/lessons/select-lesson/select-lesson.service';
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {FakeDbService} from './fake-db/fake-db.service';
+import {LessonService} from './main/lessons/lesson.service';
 
 const routes: Routes = [
     {
@@ -41,7 +41,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin] }
     },
-
+    {
+        path: 'lessons',
+        loadChildren: () => import('./main/lessons/lessons.module').then(m => m.LessonsModule),
+        canActivate: [AuthGuard],
+    },
 
     // otherwise redirect to home
     {   path: '**',
@@ -61,7 +65,7 @@ const routes: Routes = [
         BrowserAnimationsModule,
         HttpClientModule,
         RouterModule.forRoot(routes),
-        InMemoryWebApiModule.forRoot(FakeDbService),
+        // InMemoryWebApiModule.forRoot(FakeDbService),
         TranslateModule.forRoot(),
 
         // Material moment date module
@@ -90,8 +94,8 @@ const routes: Routes = [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
-        fakeBackendProvider,
-        SelectLessonService
+        // fakeBackendProvider,
+        LessonService
     ],
     bootstrap   : [
         AppComponent
